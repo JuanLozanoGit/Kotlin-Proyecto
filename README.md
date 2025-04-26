@@ -95,5 +95,5 @@ Formato completo de archivos Excel
 
 API de integración
 
-🤝 Contribución
-¡Contribuciones son bienvenidas! Por favor lee nuestras guías de contribución antes de enviar un PR.
+🤝 Integrantes:
+Juan Lozano, Julio Guarnizo, Maria Parra, Andres Espitia
