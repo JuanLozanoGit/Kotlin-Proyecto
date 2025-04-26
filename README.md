@@ -1,97 +1,121 @@
-📚 Sistema de Gestión de Contenidos
-Este proyecto en Kotlin permite gestionar un catálogo de series y películas, cargar datos desde un archivo Excel (.xlsx) y realizar un análisis predictivo básico para sugerir características ideales de nuevos contenidos.
+#  Sistema de Gestión de Contenidos en Kotlin
 
-🚀 Funcionalidades
-Consultar listado de contenidos (series y películas).
+---
 
-Cargar información automáticamente desde archivos Excel.
+##  Descripción General
 
-Realizar análisis predictivo sobre el catálogo:
+Este proyecto es una aplicación de consola en **Kotlin** que permite:
 
-Estadísticas de cantidad de contenidos.
+- **Consultar** un catálogo de películas y series.
+- **Cargar** contenidos desde un archivo **Excel** (.xlsx).
+- **Realizar un análisis predictivo** de los contenidos.
+- **Sugerir recomendaciones** para nuevos contenidos.
 
-Rating promedio por tipo (serie o película).
+Se utiliza **Apache POI** para leer archivos de Excel.
 
-Identificación de géneros más populares.
+---
 
-Recomendación de características para nuevos contenidos.
+##  Estructura del Proyecto
 
-🛠️ Tecnologías Utilizadas
-Kotlin (JVM)
+- **Contenido.kt**: Clase que representa un contenido (película o serie).
+- **Catalogo.kt**: Clase que gestiona los contenidos (agregar, consultar, cargar, analizar).
+- **Funciones auxiliares**: Manejo de entrada de usuario.
+- **Main.kt**: Punto de entrada del programa.
 
-Apache POI (org.apache.poi.ss.usermodel, org.apache.poi.xssf.usermodel) para lectura de archivos Excel.
+---
 
-📂 Estructura de Clases
+##  Descripción de las Clases y Funciones
 
-Clase	Descripción
-Contenido	Representa un contenido individual (serie o película) con atributos como título, género, duración, rating, etc.
-Catalogo	Gestiona una colección de Contenido, permite agregar, listar, cargar desde Excel y realizar análisis predictivo.
-Main.kt	Implementa el menú de opciones y la interacción con el usuario.
-🧩 Requisitos Previos
-JDK 8 o superior
+### Contenido
 
-Gradle o Maven si deseas gestionar dependencias
+Representa una película o serie.
 
-Agregar dependencias de Apache POI en tu proyecto:
+**Atributos:**
+- `id`: Identificador único.
+- `titulo`: Título del contenido.
+- `tipo`: "Serie" o "Película".
+- `rating`: Calificación promedio.
+- `duracion`: Duración en minutos.
+- `genero`: Género principal.
+- `año`: Año de lanzamiento.
 
-gradle
-Copy
-Edit
-dependencies {
-    implementation 'org.apache.poi:poi:5.2.3'
-    implementation 'org.apache.poi:poi-ooxml:5.2.3'
-}
-(Versiones actualizadas de Apache POI)
+**Métodos:**
+- Getters para cada atributo.
+- `mostrarInfo()`: Imprime en consola la información del contenido.
 
-📝 Formato del Archivo Excel
-El archivo debe tener las siguientes columnas (en este orden, desde la celda A1):
+---
 
+### Catalogo
 
-ID	Título	Tipo	Rating	Duración (min)	Género	Año
-Ejemplo:
+Gestiona la colección de contenidos.
 
+**Métodos principales:**
 
-ID	Título	Tipo	Rating	Duración	Género	Año
-1	Stranger Things	Serie	8.7	50	Ciencia Ficción	2016
-2	Inception	Película	8.8	148	Ciencia Ficción	2010
-Notas:
+- `agregarContenido(contenido: Contenido)`: Agrega un contenido si no existe el ID.
+- `consultarContenidos()`: Muestra todos los contenidos.
+- `cargarDesdeExcel(filePath: String)`: Carga contenidos desde un archivo Excel.
+- `analizarContenidos()`: Realiza un análisis de los contenidos:
+  - Número de series y películas.
+  - Rating promedio.
+  - Géneros con mejor aceptación.
+  - Recomendación predictiva basada en datos.
 
-La primera fila debe ser de encabezado.
+---
 
-Los datos deben ser consistentes para un correcto procesamiento.
+### Funciones Auxiliares
 
-🖥️ Cómo Usarlo
-Ejecuta el programa.
+- `leerOpcion()`: Valida que el input del usuario sea un número entero.
 
-Elige una opción del menú:
+---
 
-1: Consultar los contenidos actuales en memoria.
+### Main
 
-2: Cargar nuevos contenidos desde un archivo .xlsx.
+Controla el flujo del programa mostrando un menú de opciones:
 
-3: Realizar un análisis predictivo del catálogo.
+- **1. Consultar contenidos**.
+- **2. Cargar desde Excel**.
+- **3. Análisis predictivo**.
+- **0. Salir**.
 
-0: Salir del programa.
+Utiliza un `do-while` para mantener activo el menú hasta que el usuario decida salir.
 
-Si eliges cargar un Excel, proporciona la ruta del archivo cuando sea solicitada.
+---
 
-Ejemplo de menú:
-bash
-Copy
-Edit
---- SISTEMA DE GESTIÓN DE CONTENIDOS ---
-1. Consultar contenidos
-2. Cargar desde Excel
-3. Análisis predictivo
-0. Salir
-⚙️ Análisis Predictivo Incluye:
-Conteo de series y películas.
+##  Tecnologías Utilizadas
 
-Rating promedio por tipo de contenido.
+- **Kotlin** - Lenguaje de programación.
+- **Apache POI** - Lectura de archivos `.xlsx`.
 
-Top 3 géneros con mejor rating.
+---
 
-Recomendación para un nuevo contenido basándose en los datos históricos.
+##  Manejo de Errores
 
-👨‍💻 Autor
+- Verificación de duplicidad de ID.
+- Validación de entrada del usuario.
+- Manejo de errores al leer archivos Excel o procesar datos corruptos.
+
+---
+
+##  Posibles Mejoras Futuras
+
+- Persistir datos en una base de datos (SQLite, MySQL).
+- Crear una interfaz gráfica (JavaFX / Compose).
+- Exportar resultados a nuevos archivos Excel o CSV.
+- Añadir machine learning real para recomendaciones avanzadas.
+
+---
+
+##  Conclusión
+
+Este proyecto demuestra:
+
+- Buenas prácticas de **POO** en Kotlin.
+- Manejo básico de archivos externos.
+- Implementación de análisis predictivo simple.
+- Separación clara de responsabilidades en el código.
+
+Ideal para bases de proyectos más complejos en gestión de datos.
+
+---
+## Autores:
 Juan Lozano, Andres Espitia, Julio Guarnizo, Maria Parra
