@@ -1,106 +1,227 @@
-# 📄 Informe Técnico: Gestor de Contenidos Audiovisuales
+🛠️ Informe Técnico Detallado: Sistema de Gestión de Contenidos en Kotlin
+1. Descripción General
+Este proyecto implementa un sistema de gestión de contenidos en Kotlin, diseñado para:
 
-## 🏗️ Arquitectura
-```mermaid
-graph LR
-    A[Excel] --> B[Parser POI]
-    B --> C[Modelo Kotlin]
-    C --> D[Analizador]
-    D --> E[Reportes CSV/Consola]
-🔧 Stack Tecnológico
-Kotlin 1.9.22 (Coroutines para async)
+Cargar datos de series y películas desde archivos Excel (.xlsx).
 
-Apache POI 5.2.3 (Procesamiento Excel)
+Consultar la lista de contenidos.
 
-Gradle 8.4 (Build tool)
+Realizar un análisis predictivo simplificado.
 
-JDK 17 (Requisito mínimo)
+Sugerir características para nuevos contenidos basados en el histórico.
 
-📊 Modelo de Datos
+2. Arquitectura del Sistema
+El sistema está organizado en tres componentes principales:
+
+
+Componente	Rol
+Contenido	Modelo de datos: representa un contenido (serie o película).
+Catalogo	Servicio de negocio: administra y analiza los contenidos.
+main()	Capa de presentación: interacción con el usuario mediante consola.
+Además, incluye una función de utilidad: leerOpcion().
+
+3. Detalle de las Clases y Funciones
+3.1 Clase Contenido
 kotlin
-data class Contenido(
-    val id: String,          // ID IMDB (tt123456)
-    val titulo: String,      // Nombre del contenido
-    val tipo: String,        // "Serie"|"Película"
-    val rating: Double,      // 0.0-10.0
-    val duracion: Int,       // Minutos (series: por episodio)
-    val genero: String,      // Género principal
-    val año: Int,            // Año lanzamiento
-    val temporadas: Int = 1  // Opcional para series
+Copy
+Edit
+class Contenido(
+    private val id: String,
+    private var titulo: String,
+    private var tipo: String,
+    private var rating: Double,
+    private var duracion: Int,
+    private var genero: String,
+    private var año: Int
 )
-🚀 Flujo Principal
-Carga de Datos:
+Propósito:
+Modelar individualmente cada contenido (serie o película).
 
-Validación estructura archivo (headers)
+Atributos:
 
-Transformación filas → objetos Kotlin
+Atributo	Tipo	Descripción
+id	String	Identificador único del contenido.
+titulo	String	Nombre del contenido.
+tipo	String	"Serie" o "Película".
+rating	Double	Valoración promedio (0.0 a 10.0).
+duracion	Int	Duración en minutos.
+genero	String	Género principal (Drama, Comedia, etc.).
+año	Int	Año de lanzamiento.
+Métodos:
 
-Almacenamiento en MutableList<Contenido>
+Método	Descripción
+getId()	Devuelve el ID del contenido.
+getTitulo()	Devuelve el título.
+getTipo()	Devuelve el tipo.
+getRating()	Devuelve el rating.
+getDuracion()	Devuelve la duración.
+getGenero()	Devuelve el género.
+getAño()	Devuelve el año de estreno.
+mostrarInfo()	Muestra en consola los datos formateados, con espacios bien distribuidos.
+Notas:
+Los getters mantienen encapsulamiento.
 
-Análisis:
+El método mostrarInfo() facilita la visualización del catálogo de forma ordenada.
 
+3.2 Clase Catalogo
 kotlin
-fun analizar() {
-    val (series, peliculas) = contenidos.partition { it.tipo == "Serie" }
-    calcularMetricas(series, "Series")
-    calcularMetricas(peliculas, "Películas")
-    generarRecomendaciones()
+Copy
+Edit
+class Catalogo {
+    private val contenidos = mutableListOf<Contenido>()
 }
-Salida:
+Propósito:
+Administrar la colección de contenidos en memoria.
 
-Consola interactiva
+Atributos:
 
-Exportación a CSV (opcional)
-
-🔮 Motor Predictivo
-Algoritmos Implementados
-Técnica	Uso	Precisión
-Media móvil	Tendencia ratings	±0.2
-K-means	Segmentación géneros	82%
-Regresión lineal	Proyección duración	R² 0.76
-Ejemplo Recomendación
-text
-[RECOMENDACIÓN 2024]
-Tipo: Miniserie (6-8 episodios)  
-Género: Sci-Fi/Drama  
-Duración: 45-50 min  
-Rating esperado: 8.1-8.5 (±0.3)
-📌 Requisitos
-Mínimos:
-
-2 CPU cores
-
-2GB RAM
-
-200MB disco
-
-Recomendados:
-
-4 CPU cores
-
-4GB RAM
-
-SSD
-
-🐞 Pruebas
-gherkin
-Feature: Carga de datos
-  Scenario: Archivo válido
-    Given Excel con 100 registros
-    When Ejecuto carga
-    Then 100 contenidos procesados
-    And Tiempo < 1s
-📈 Métricas Clave
+Atributo	Tipo	Descripción
+contenidos	MutableList<Contenido>	Lista de objetos Contenido.
+Métodos:
+agregarContenido(contenido: Contenido)
 kotlin
-object Metricas {
-    const val MAX_REGISTROS = 50_000
-    const val TIEMPO_CARGA = 1.5 // ms/registro
-    const val MEMORIA = 150 // MB base
-}
-🛠️ Configuración
+Copy
+Edit
+fun agregarContenido(contenido: Contenido)
+Función: Agrega un nuevo contenido si su ID no está repetido.
+
+Validación: Verifica duplicados por ID (any { it.getId() == contenido.getId() }).
+
+Mensajes: Muestra mensaje de error si ya existe.
+
+consultarContenidos()
+kotlin
+Copy
+Edit
+fun consultarContenidos()
+Función: Muestra todos los contenidos cargados.
+
+Condiciones: Informa si la lista está vacía.
+
+cargarDesdeExcel(filePath: String)
+kotlin
+Copy
+Edit
+fun cargarDesdeExcel(filePath: String)
+Función: Carga múltiples contenidos leyendo un archivo .xlsx.
+
+Pasos:
+
+Abrir el archivo (FileInputStream).
+
+Leer el primer Sheet (getSheetAt(0)).
+
+Iterar filas, omitiendo encabezados (rowNum == 0).
+
+Extraer datos de celdas.
+
+Crear objetos Contenido y agregarlos.
+
+Validaciones:
+
+Si el ID o el título son vacíos, no agrega.
+
+Captura excepciones en filas individuales.
+
+Errores posibles:
+
+Archivo inexistente, formato incorrecto, celdas vacías.
+
+Resumen: Informa cantidad de contenidos cargados.
+
+analizarContenidos()
+kotlin
+Copy
+Edit
+fun analizarContenidos()
+Función: Realiza análisis predictivo sobre el catálogo.
+
+Análisis detallado:
+
+Total de contenidos, separados en series y películas.
+
+Promedio de ratings por tipo.
+
+Top 3 géneros con mejor rating promedio.
+
+Recomendación de tipo, género, duración y rating esperado.
+
+3.3 Función leerOpcion()
+kotlin
+Copy
+Edit
+fun leerOpcion(): Int
+Función: Leer de forma segura una opción numérica del usuario.
+
+Validación: Asegura que solo se aceptan números enteros.
+
+Reintentos: Si se ingresa texto o vacío, vuelve a solicitar la entrada.
+
+3.4 Función main()
+kotlin
+Copy
+Edit
+fun main()
+Función: Gestiona el menú principal del programa.
+
+Ciclo de vida:
+
+Mostrar menú.
+
+Leer opción usando leerOpcion().
+
+Ejecutar acción:
+
+1: Mostrar catálogo (consultarContenidos).
+
+2: Cargar datos desde Excel (cargarDesdeExcel).
+
+3: Ejecutar análisis predictivo (analizarContenidos).
+
+0: Salir.
+
+Notas:
+
+Cuando se selecciona cargar Excel, se solicita ruta manualmente.
+
+4. Librerías Externas
+
+Librería	Propósito
+org.apache.poi.ss.usermodel.*	Leer estructuras básicas de Excel (celdas, filas).
+org.apache.poi.xssf.usermodel.XSSFWorkbook	Trabajar con archivos Excel .xlsx modernos.
+5. Ejemplo de Ejecución
 bash
-# Ejecutar con parámetros:
-./gradlew run --args="--input=datos.xlsx --export=reporte.csv"
+Copy
+Edit
+--- SISTEMA DE GESTIÓN DE CONTENIDOS ---
+1. Consultar contenidos
+2. Cargar desde Excel
+3. Análisis predictivo
+0. Salir
 
-# Generar JAR ejecutable:
-./gradlew shadowJar
+Seleccione una opción: 2
+Ingrese ruta del archivo Excel:
+ruta/a/miarchivo.xlsx
+Contenido agregado con éxito.
+Contenido agregado con éxito.
+...
+Contenidos cargados: 25
+6. Posibles Errores Controlados
+
+Error	Control Implementado
+Ruta de archivo inválida	Try-catch al abrir el archivo.
+Celdas vacías o mal formateadas	Try-catch por fila al leer celdas.
+ID duplicado	Validación antes de agregar contenido.
+Entrada no numérica en menú	Validación en leerOpcion().
+7. Mejoras Futuras (Ideas)
+Persistencia en base de datos (SQLite, PostgreSQL).
+
+Exportación del catálogo a nuevos archivos Excel o CSV.
+
+Análisis predictivo avanzado usando Machine Learning.
+
+Interfaz gráfica (GUI) con JavaFX o TornadoFX.
+
+8. Conclusión
+Este proyecto demuestra cómo construir un sistema estructurado, extensible y seguro en Kotlin, integrando entrada/salida de archivos externos y procesamiento de datos básicos, aplicando principios de programación orientada a objetos.
+
