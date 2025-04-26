@@ -27,3 +27,66 @@ Aplicación Kotlin para gestionar y analizar catálogos de contenidos audiovisua
 
 ```bash
 ./gradlew build
+
+##Estructura del Archivo Excel
+##El archivo Excel debe tener esta estructura en la primera hoja:
+
+ID	Título	Tipo	Rating	Duración	Género	Año
+tt123456	Stranger Things	Serie	8.7	34	Ciencia ficción	2016
+tt234567	The Irishman	Película	7.8	209	Drama	2019
+Uso
+Ejecuta la aplicación y selecciona opciones del menú:
+
+##Consultar contenidos: Muestra todo el catálogo
+
+##Cargar desde Excel: Importa datos desde archivo XLSX
+
+##Análisis predictivo: Genera recomendaciones basadas en datos
+
+##Salir: Cierra la aplicación
+
+##Análisis Predictivo Incluye
+Comparativa series vs películas
+
+Top 3 géneros por rating
+
+Duración óptima por tipo de contenido
+
+Recomendaciones para nuevos contenidos
+
+##Ejemplo de Salida
+=== ANÁLISIS PREDICTIVO ===
+
+##ESTADÍSTICAS BÁSICAS:
+Total contenidos: 15
+Series: 8 | Películas: 7
+
+##RATING PROMEDIO:
+Series: 8.4
+Películas: 7.6
+
+##GÉNEROS CON MEJOR RATING:
+1. Thriller: 8.7
+2. Ciencia ficción: 8.5
+3. Drama: 7.9
+
+##RECOMENDACIÓN PARA NUEVO CONTENIDO:
+Tipo: Serie
+Género: Thriller
+Duración sugerida: 52min
+Rating esperado: 8.4
+Licencia
+MIT License - Ver LICENSE para más detalles.
+
+
+##Este README incluye:
+
+1. Badges para mostrar tecnologías usadas
+2. Sección clara de características
+3. Requisitos técnicos específicos
+4. Instrucciones de configuración
+5. Estructura requerida del Excel
+6. Explicación del análisis predictivo
+7. Ejemplo de salida del sistema
+8. Información de licencia
+
