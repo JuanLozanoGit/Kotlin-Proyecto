@@ -1,92 +1,99 @@
-# Sistema de Gestión de Contenidos Audiovisuales
+# 🎬 Sistema de Gestión y Análisis de Contenidos Audiovisuales
 
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue.svg)
-![Gradle](https://img.shields.io/badge/Gradle-8.4-green.svg)
-![POI](https://img.shields.io/badge/Apache_POI-5.2.3-red.svg)
+![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue?logo=kotlin)
+![Gradle](https://img.shields.io/badge/Gradle-8.4-green?logo=gradle)
+![POI](https://img.shields.io/badge/Apache_POI-5.2.3-red?logo=apache)
+![License](https://img.shields.io/badge/License-MIT-yellow)
 
-Aplicación Kotlin para gestionar y analizar catálogos de contenidos audiovisuales (series y películas) con capacidades predictivas.
+Aplicación avanzada para la gestión y análisis predictivo de catálogos audiovisuales, diseñada para productoras y plataformas de streaming. Procesa datos de series y películas, generando insights valiosos para la toma de decisiones.
 
-## Características Principales
+## ✨ Características Destacadas
 
-- 📊 **Gestión de contenidos**: Añadir, consultar y analizar series y películas
-- 📥 **Importación desde Excel**: Carga datos desde archivos XLSX
-- 🔮 **Análisis predictivo**: Recomendaciones basadas en datos históricos
-- 📈 **Estadísticas**: Rating promedio, géneros más populares, duración óptima
+### 📦 Gestión de Contenidos
+- **CRUD completo** para series y películas
+- **Búsqueda y filtrado** por múltiples criterios
+- **Visualización organizada** en formato tabla
 
-## Requisitos Técnicos
+### 📊 Análisis de Datos
+- **Métricas clave**: Rating promedio, duración óptima
+- **Comparativas**: Series vs Películas
+- **Tendencias temporales**: Evolución por año
 
-- Java 17 o superior
-- Gradle 8.4+
-- Kotlin 1.9.22
+### 🔮 Motor Predictivo
+- **Recomendaciones inteligentes** para nuevos contenidos
+- **Identificación de patrones** en géneros exitosos
+- **Proyección de performance** basada en datos históricos
 
-## Configuración
+## 🛠 Requisitos Técnicos
 
-1. Clona el repositorio
-2. Configura el JDK 17 en tu IDE
-3. Actualiza las dependencias con Gradle
+| Componente | Versión |
+|------------|---------|
+| Java JDK | 17+ |
+| Gradle | 8.4+ |
+| Kotlin | 1.9.22 |
+| Apache POI | 5.2.3 |
 
+## 🚀 Configuración Rápida
+
+1. Clonar repositorio:
 ```bash
+git clone https://github.com/tu-repositorio/gestor-contenidos.git
+cd gestor-contenidos
+Configurar entorno:
+
+bash
 ./gradlew build
+Ejecutar aplicación:
 
-##Estructura del Archivo Excel
-##El archivo Excel debe tener esta estructura en la primera hoja:
+bash
+./gradlew run
+📋 Estructura del Dataset (Excel)
+El archivo debe contener estas columnas en la primera hoja:
 
-ID	Título	Tipo	Rating	Duración	Género	Año
-tt123456	Stranger Things	Serie	8.7	34	Ciencia ficción	2016
-tt234567	The Irishman	Película	7.8	209	Drama	2019
-Uso
-Ejecuta la aplicación y selecciona opciones del menú:
+csv
+ID,Título,Tipo,Rating,Duración,Género,Año
+tt123456,Stranger Things,Serie,8.7,34,Ciencia ficción,2016
+tt234567,The Irishman,Película,7.8,209,Drama,2019
+💡 Tip: Puedes exportar directamente desde bases de datos o herramientas como IMDb
 
-##Consultar contenidos: Muestra todo el catálogo
+🖥 Interfaz de Usuario
+Menú principal interactivo:
 
-##Cargar desde Excel: Importa datos desde archivo XLSX
+=== SISTEMA DE GESTIÓN DE CONTENIDOS ===
 
-##Análisis predictivo: Genera recomendaciones basadas en datos
+1. 📄 Consultar catálogo completo
+2. 📥 Cargar datos desde Excel
+3. 🔍 Buscar contenidos
+4. 📊 Análisis predictivo
+5. 🛠 Herramientas avanzadas
+0. ❌ Salir
+🔍 Ejemplo de Análisis Predictivo
+markdown
+=== ANÁLISIS PREDICTIVO - RESUMEN EJECUTIVO ===
 
-##Salir: Cierra la aplicación
+📅 Período analizado: 2015-2023
+📊 Muestra: 142 contenidos (68 series / 74 películas)
 
-##Análisis Predictivo Incluye
-Comparativa series vs películas
+TOP PERFORMERS:
+1. The Crown (Rating: 9.1)
+2. Dune (Rating: 8.8)
+3. Stranger Things (Rating: 8.7)
 
-Top 3 géneros por rating
+📈 TENDENCIAS:
+• Series: ↑12% rating promedio últimos 3 años
+• Películas: ↓5% duración promedio
 
-Duración óptima por tipo de contenido
+🎯 RECOMENDACIÓN 2024:
+Tipo: Miniserie (8-10 episodios)
+Género: Drama histórico
+Duración: 52-58 min/episodio
+Rating proyectado: 8.2-8.6
+📚 Documentación Adicional
+Guía de implementación avanzada
 
-Recomendaciones para nuevos contenidos
+Formato completo de archivos Excel
 
-##Ejemplo de Salida
-=== ANÁLISIS PREDICTIVO ===
+API de integración
 
-##ESTADÍSTICAS BÁSICAS:
-Total contenidos: 15
-Series: 8 | Películas: 7
-
-##RATING PROMEDIO:
-Series: 8.4
-Películas: 7.6
-
-##GÉNEROS CON MEJOR RATING:
-1. Thriller: 8.7
-2. Ciencia ficción: 8.5
-3. Drama: 7.9
-
-##RECOMENDACIÓN PARA NUEVO CONTENIDO:
-Tipo: Serie
-Género: Thriller
-Duración sugerida: 52min
-Rating esperado: 8.4
-Licencia
-MIT License - Ver LICENSE para más detalles.
-
-
-##Este README incluye:
-
-1. Badges para mostrar tecnologías usadas
-2. Sección clara de características
-3. Requisitos técnicos específicos
-4. Instrucciones de configuración
-5. Estructura requerida del Excel
-6. Explicación del análisis predictivo
-7. Ejemplo de salida del sistema
-8. Información de licencia
-
+🤝 Contribución
+¡Contribuciones son bienvenidas! Por favor lee nuestras guías de contribución antes de enviar un PR.
