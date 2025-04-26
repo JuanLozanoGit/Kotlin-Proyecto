@@ -1,99 +1,97 @@
-# 🎬 Sistema de Gestión y Análisis de Contenidos Audiovisuales
+📚 Sistema de Gestión de Contenidos
+Este proyecto en Kotlin permite gestionar un catálogo de series y películas, cargar datos desde un archivo Excel (.xlsx) y realizar un análisis predictivo básico para sugerir características ideales de nuevos contenidos.
 
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9.22-blue?logo=kotlin)
-![Gradle](https://img.shields.io/badge/Gradle-8.4-green?logo=gradle)
-![POI](https://img.shields.io/badge/Apache_POI-5.2.3-red?logo=apache)
-![License](https://img.shields.io/badge/License-MIT-yellow)
+🚀 Funcionalidades
+Consultar listado de contenidos (series y películas).
 
-Aplicación avanzada para la gestión y análisis predictivo de catálogos audiovisuales, diseñada para productoras y plataformas de streaming. Procesa datos de series y películas, generando insights valiosos para la toma de decisiones.
+Cargar información automáticamente desde archivos Excel.
 
-## ✨ Características Destacadas
+Realizar análisis predictivo sobre el catálogo:
 
-### 📦 Gestión de Contenidos
-- **CRUD completo** para series y películas
-- **Búsqueda y filtrado** por múltiples criterios
-- **Visualización organizada** en formato tabla
+Estadísticas de cantidad de contenidos.
 
-### 📊 Análisis de Datos
-- **Métricas clave**: Rating promedio, duración óptima
-- **Comparativas**: Series vs Películas
-- **Tendencias temporales**: Evolución por año
+Rating promedio por tipo (serie o película).
 
-### 🔮 Motor Predictivo
-- **Recomendaciones inteligentes** para nuevos contenidos
-- **Identificación de patrones** en géneros exitosos
-- **Proyección de performance** basada en datos históricos
+Identificación de géneros más populares.
 
-## 🛠 Requisitos Técnicos
+Recomendación de características para nuevos contenidos.
 
-| Componente | Versión |
-|------------|---------|
-| Java JDK | 17+ |
-| Gradle | 8.4+ |
-| Kotlin | 1.9.22 |
-| Apache POI | 5.2.3 |
+🛠️ Tecnologías Utilizadas
+Kotlin (JVM)
 
-## 🚀 Configuración Rápida
+Apache POI (org.apache.poi.ss.usermodel, org.apache.poi.xssf.usermodel) para lectura de archivos Excel.
 
-1. Clonar repositorio:
-```bash
-git clone https://github.com/tu-repositorio/gestor-contenidos.git
-cd gestor-contenidos
-Configurar entorno:
+📂 Estructura de Clases
 
+Clase	Descripción
+Contenido	Representa un contenido individual (serie o película) con atributos como título, género, duración, rating, etc.
+Catalogo	Gestiona una colección de Contenido, permite agregar, listar, cargar desde Excel y realizar análisis predictivo.
+Main.kt	Implementa el menú de opciones y la interacción con el usuario.
+🧩 Requisitos Previos
+JDK 8 o superior
+
+Gradle o Maven si deseas gestionar dependencias
+
+Agregar dependencias de Apache POI en tu proyecto:
+
+gradle
+Copy
+Edit
+dependencies {
+    implementation 'org.apache.poi:poi:5.2.3'
+    implementation 'org.apache.poi:poi-ooxml:5.2.3'
+}
+(Versiones actualizadas de Apache POI)
+
+📝 Formato del Archivo Excel
+El archivo debe tener las siguientes columnas (en este orden, desde la celda A1):
+
+
+ID	Título	Tipo	Rating	Duración (min)	Género	Año
+Ejemplo:
+
+
+ID	Título	Tipo	Rating	Duración	Género	Año
+1	Stranger Things	Serie	8.7	50	Ciencia Ficción	2016
+2	Inception	Película	8.8	148	Ciencia Ficción	2010
+Notas:
+
+La primera fila debe ser de encabezado.
+
+Los datos deben ser consistentes para un correcto procesamiento.
+
+🖥️ Cómo Usarlo
+Ejecuta el programa.
+
+Elige una opción del menú:
+
+1: Consultar los contenidos actuales en memoria.
+
+2: Cargar nuevos contenidos desde un archivo .xlsx.
+
+3: Realizar un análisis predictivo del catálogo.
+
+0: Salir del programa.
+
+Si eliges cargar un Excel, proporciona la ruta del archivo cuando sea solicitada.
+
+Ejemplo de menú:
 bash
-./gradlew build
-Ejecutar aplicación:
+Copy
+Edit
+--- SISTEMA DE GESTIÓN DE CONTENIDOS ---
+1. Consultar contenidos
+2. Cargar desde Excel
+3. Análisis predictivo
+0. Salir
+⚙️ Análisis Predictivo Incluye:
+Conteo de series y películas.
 
-bash
-./gradlew run
-📋 Estructura del Dataset (Excel)
-El archivo debe contener estas columnas en la primera hoja:
+Rating promedio por tipo de contenido.
 
-csv
-ID,Título,Tipo,Rating,Duración,Género,Año
-tt123456,Stranger Things,Serie,8.7,34,Ciencia ficción,2016
-tt234567,The Irishman,Película,7.8,209,Drama,2019
-💡 Tip: Puedes exportar directamente desde bases de datos o herramientas como IMDb
+Top 3 géneros con mejor rating.
 
-🖥 Interfaz de Usuario
-Menú principal interactivo:
+Recomendación para un nuevo contenido basándose en los datos históricos.
 
-=== SISTEMA DE GESTIÓN DE CONTENIDOS ===
-
-1. 📄 Consultar catálogo completo
-2. 📥 Cargar datos desde Excel
-3. 🔍 Buscar contenidos
-4. 📊 Análisis predictivo
-5. 🛠 Herramientas avanzadas
-0. ❌ Salir
-🔍 Ejemplo de Análisis Predictivo
-markdown
-=== ANÁLISIS PREDICTIVO - RESUMEN EJECUTIVO ===
-
-📅 Período analizado: 2015-2023
-📊 Muestra: 142 contenidos (68 series / 74 películas)
-
-TOP PERFORMERS:
-1. The Crown (Rating: 9.1)
-2. Dune (Rating: 8.8)
-3. Stranger Things (Rating: 8.7)
-
-📈 TENDENCIAS:
-• Series: ↑12% rating promedio últimos 3 años
-• Películas: ↓5% duración promedio
-
-🎯 RECOMENDACIÓN 2024:
-Tipo: Miniserie (8-10 episodios)
-Género: Drama histórico
-Duración: 52-58 min/episodio
-Rating proyectado: 8.2-8.6
-📚 Documentación Adicional
-Guía de implementación avanzada
-
-Formato completo de archivos Excel
-
-API de integración
-
-🤝 Integrantes:
-Juan Lozano, Julio Guarnizo, Maria Parra, Andres Espitia
+👨‍💻 Autor
+Juan Lozano, Andres Espitia, Julio Guarnizo, Maria Parra
